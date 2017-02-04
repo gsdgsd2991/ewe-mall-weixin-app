@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import responses
-from mysite.serializer import CustomerSerializer
+from mysite.serializer import *
 from polls.models import TblCustomer
 from rest_framework.response import Response
 from datetime import *
@@ -34,7 +34,25 @@ def get_customer(request,weixinOpenId,nickname,sex):
     if request.method == 'GET':
         serializer = CustomerSerializer(customer)
         return Response(serializer.data)
+@api_view(['GET'])
+def get_bodys(request,customerId):
+    try:
+        bodys = TblCustomerShape.objects.get(customer_id = customerId)
+        serilizer = ShapeSerializer(bodys,many=True)
+        return Response(serilizer.data)
+    except:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
 @api_view(['GET','PUT','DELETE'])
+def create_body(request,customerId):
+    try:
+        body = TblCustomerShape()
+        body.save()
+    except:
+        return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+@api_view(['GET','PUT','DELETE'])
+def create_body_image(request,img_url):
+    return
 
 @api_view(['GET','POST'])
 def get_customer_list(request):
