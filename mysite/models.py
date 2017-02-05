@@ -1725,6 +1725,21 @@ class TblCustomerShape(models.Model):
         managed = False
         db_table = 'tbl_customer_shape'
 
+class TblCustomerMatchHistory(models.Model):
+    id = models.IntegerField(db_column='ID',primary_key=True)
+    customer_id = models.IntegerField(db_column='CUSTOMER_ID',blank=TRUE,null=TRUE)
+    customization_person_name = models.CharField(max_length=40,blank=True,null=True)
+    match_id = models.IntegerField(blank=True,null=True)
+    deleted_date = models.DateTimeField(blank=True, null=True)
+    last_modified = models.DateTimeField(blank=True, null=True)
+    deleted = models.IntegerField(blank=True, null=True)
+    created_by = models.IntegerField(blank=True, null=True)
+    created_date = models.DateTimeField(blank=True, null=True)
+    last_modified_id = models.IntegerField(blank=True, null=True)
+    class Meta:
+        managed=True
+        db_table='tbl_customer_match_history'
+
 
 class TblCustomerStatistics(models.Model):
     id = models.IntegerField(db_column='ID', primary_key=True)  # Field name made lowercase.
