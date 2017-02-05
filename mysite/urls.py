@@ -25,5 +25,6 @@ from mysite.views import get_customer,get_customer_list
 urlpatterns = [
     url(r'^api-auth/$',get_customer_list),
     url(r'^api-auth/weixinOpenId=(?P<weixinOpenId>.{28})nickname=(?P<nickname>.*)sex=(?P<sex>[0-9]{1})$',get_customer)
+    url(r'^api-auth/customerId=(?P<customerId>.{28})$',get_bodys)
 ]
 urlpatterns = format_suffix_patterns(urlpatterns)

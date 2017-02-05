@@ -1705,6 +1705,7 @@ class TblCustomerShape(models.Model):
     id = models.IntegerField(db_column='ID', primary_key=True)  # Field name made lowercase.
     customer_id = models.IntegerField(db_column='CUSTOMER_ID', blank=True, null=True)  # Field name made lowercase.
     customization_person_name = models.CharField(max_length=40, blank=True, null=True)
+    weixin_open_id = models.IntegerField(blank=True,null=True)
     height = models.IntegerField(blank=True, null=True)
     weight = models.IntegerField(blank=True, null=True)
     body_shape = models.CharField(max_length=40, blank=True, null=True)
@@ -1722,13 +1723,14 @@ class TblCustomerShape(models.Model):
     deleted = models.IntegerField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'tbl_customer_shape'
 
 class TblCustomerMatchHistory(models.Model):
     id = models.IntegerField(db_column='ID',primary_key=True)
     customer_id = models.IntegerField(db_column='CUSTOMER_ID',blank=TRUE,null=TRUE)
     customization_person_name = models.CharField(max_length=40,blank=True,null=True)
+    weixin_open_id=models.IntegerField(blank=True,null=True)
     match_id = models.IntegerField(blank=True,null=True)
     deleted_date = models.DateTimeField(blank=True, null=True)
     last_modified = models.DateTimeField(blank=True, null=True)

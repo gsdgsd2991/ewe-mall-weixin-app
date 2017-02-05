@@ -35,19 +35,19 @@ def get_customer(request,weixinOpenId,nickname,sex):
         serializer = CustomerSerializer(customer)
         return Response(serializer.data)
 @api_view(['GET'])
-def get_bodys(request,customerId):
+def get_bodys(request,weixinOpenId):
     try:
-        bodys = TblCustomerShape.objects.get(customer_id = customerId)
+        bodys = TblCustomerShape.objects.get(weixin_open_id = weixinOpenId)
         serilizer = ShapeSerializer(bodys,many=True)
         return Response(serilizer.data)
     except:
         return Response(status=status.HTTP_404_NOT_FOUND)
 #customer create or change body shape
 @api_view(['POST','GET','DELETE'])
-def create_body(request,customerId,name,h,w,bshape,fshape,fcolor):
+def create_body(request,weixinOpenId,name,h,w,bshape,fshape,fcolor):
     if request.method == 'POST':
         try:
-            body = TblCustomerShape.objects.get(customer_id = customerId,customization_person_name=name)
+            body = TblCustomerShape.objects.get(weixin_open_id = weixinOpenId,customization_person_name=name)
             body.height = h
             body.weight = w
             body.body_shape = bshape
@@ -73,9 +73,9 @@ def create_body_image(request,img_url):
     return Response(status = status.HTTP_200_OK)
 
 @api_view(['GET'])
-def get_matches(request,customerId):
+def get_matches(request,weixinOpenId):
     try:
-        historys = TblCustomerMatchHistory.objects.filter(customer_id = customerId)
+        historys = TblCustomerMatchHistory.objects.filter(weixin_open_id = weixinOpenId)
         serializer = HistorySerializer(historys,many=True)
         return Response(serializer.data)
     except:
