@@ -9,6 +9,47 @@ from __future__ import unicode_literals
 
 from django.db import models
 
+class TblCustomerShape(models.Model):
+    id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
+    customer_id = models.IntegerField(db_column='CUSTOMER_ID', blank=True, null=True)  # Field name made lowercase.
+    customization_person_name = models.CharField(max_length=40, blank=True, null=True)
+    weixin_open_id = models.CharField(db_column='WEIXIN_OPEN_ID', max_length=200, blank=True, null=True)  # Field name made lowercase.
+    height = models.IntegerField(blank=True, null=True)
+    weight = models.IntegerField(blank=True, null=True)
+    body_shape = models.CharField(max_length=40, blank=True, null=True)
+    face_shape = models.CharField(max_length=40, blank=True, null=True)
+    face_color = models.CharField(max_length=40, blank=True, null=True)
+    image_url = models.CharField(max_length=255, blank=True, null=True)
+    isoneself = models.IntegerField(blank=True, null=True)
+    created_by = models.IntegerField(blank=True, null=True)
+    created_date = models.DateTimeField(blank=True, null=True)
+    last_modified_id = models.IntegerField(blank=True, null=True)
+    mark_for_delete = models.IntegerField(blank=True, null=True)
+    opt_counter = models.IntegerField(blank=True, null=True)
+    deleted_date = models.DateTimeField(blank=True, null=True)
+    last_modified = models.DateTimeField(blank=True, null=True)
+    deleted = models.IntegerField(blank=True, null=True)
+    sex=models.BooleanField(blank=True,default=False)
+
+    class Meta:
+        managed = True
+        db_table = 'tbl_customer_shape'
+
+class TblCustomerMatchHistory(models.Model):
+    id = models.AutoField(db_column='ID',primary_key=True)
+    customer_id = models.IntegerField(db_column='CUSTOMER_ID',blank=True,null=True)
+    customization_person_name = models.CharField(max_length=40,blank=True,null=True)
+    weixin_open_id = models.CharField( max_length=200, blank=True, null=True)  # Field name made lowercase.
+    match_id = models.IntegerField(blank=True,null=True)
+    deleted_date = models.DateTimeField(blank=True, null=True)
+    last_modified = models.DateTimeField(blank=True, null=True)
+    deleted = models.IntegerField(blank=True, null=True)
+    created_by = models.IntegerField(blank=True, null=True)
+    created_date = models.DateTimeField(blank=True, null=True)
+    last_modified_id = models.IntegerField(blank=True, null=True)
+    class Meta:
+        managed=True
+        db_table='tbl_customer_match_history'
 
 class BasMallPermission(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
@@ -1700,7 +1741,7 @@ class TblCustomerContactPointStatistics(models.Model):
         managed = False
         db_table = 'tbl_customer_contact_point_statistics'
 
-
+'''
 class TblCustomerShape(models.Model):
     id = models.IntegerField(db_column='ID', primary_key=True)  # Field name made lowercase.
     customer_id = models.IntegerField(db_column='CUSTOMER_ID', blank=True, null=True)  # Field name made lowercase.
@@ -1724,7 +1765,7 @@ class TblCustomerShape(models.Model):
     class Meta:
         managed = False
         db_table = 'tbl_customer_shape'
-
+'''
 
 class TblCustomerStatistics(models.Model):
     id = models.IntegerField(db_column='ID', primary_key=True)  # Field name made lowercase.

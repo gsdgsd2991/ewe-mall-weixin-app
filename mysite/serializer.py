@@ -9,11 +9,11 @@ class CustomerSerializer(serializers.HyperlinkedModelSerializer):
 class ShapeSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = TblCustomerShape
-        fields =  ('customization_person_name','height','weight','body_shape','face_shape','face_color','image_url','deleted')
+        fields =  ('sex','customization_person_name','height','weight','body_shape','face_shape','face_color','image_url','deleted')
 class MatchSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = EmallMatching
-        fields = (image_url)
+        fields = ('customer_name','image_url','name','comments','deleted','created_date')
 
 class HistorySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
