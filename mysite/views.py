@@ -9,6 +9,7 @@ from datetime import *
 import time
 from django.views.decorators.csrf import csrf_protect
 import json
+from mysite.recommend import *
 # Create your views here.
 #"name": "大 鱼 ❤️",
 # "weixin_open_id": "o97I8xCwM2_8mxK6nrKCvKX-UjF8",
@@ -143,5 +144,10 @@ def get_customers(request):
 def get_recommend(request):
     weixinOpenId = request.GET.get('weixinOpenId')
 
-
+@api_view(['GET'])
+def start_recommend(request):
+    rec = Recommend(weight=[1,2,3]) 
+    rec.get_recommend_list()
+    ans = rec.recommend_dict
+    return Response(status = status.HTTP_200_OK)
 

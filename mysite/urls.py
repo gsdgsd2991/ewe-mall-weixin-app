@@ -35,5 +35,6 @@ urlpatterns = [
    url(r'^api-auth/get_matches/$', get_matches),
    url(r'^api-auth/get_match/$', get_match),
    url(r'^api-auth/get_recommend/$',get_recommend),
+   url(r'^api-auth/start_recommend/$',start_recommend)
 ]
 urlpatterns = format_suffix_patterns(urlpatterns)
