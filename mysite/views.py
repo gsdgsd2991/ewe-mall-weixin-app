@@ -10,6 +10,7 @@ import time
 from django.views.decorators.csrf import csrf_protect
 import json
 from mysite.recommend import *
+import pickle
 # Create your views here.
 #"name": "大 鱼 ❤️",
 # "weixin_open_id": "o97I8xCwM2_8mxK6nrKCvKX-UjF8",
@@ -146,8 +147,28 @@ def get_recommend(request):
 
 @api_view(['GET'])
 def start_recommend(request):
-    rec = Recommend(weight=[1,2,3]) 
+    weight = open('recommend_weight.pkl','rb') 
+    rec = Recommend(weight=[int(w) for w in pickle.load(weight)])
+    weight.close() 
     rec.get_recommend_list()
     ans = rec.recommend_dict
     return Response(status = status.HTTP_200_OK)
 
+@api_view(['GET'])
+def set_recommend_num(request):
+    w1 = request.GET.get('orderWeight')
+    w2 = request.GET.get('favoriteWeight')
+    w3 = request.GET.get('genderWeight')
+    num = request.GET.get('num')
+    recommend_num = open('recommend_num.pkl','wb')
+    pickle.dump(num,recommend_num)
+    recommend_num.close()
+    weight = open('recommend_weight.pkl','wb')
+    pickle.dump([w1,w2,w3],weight)
+    weight.close()
+    return Response(status = status.HTTP_200_OK)
+
+@api_view(['GET'])
+def get_recommend_list(request):
+    id = request.GET.get('customer_id')
+    return Response(serializers.ListSerializer(Recommend.recommend[id]).data)

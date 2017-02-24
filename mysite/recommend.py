@@ -1,10 +1,11 @@
 from polls.models import *
+import pickle
 
 class Recommend:
     '''
     get the recommend list
     '''
-    
+    recommend = {}
     def __init__(self,weight):
         self.recommend_dict = {}
         self.weight = weight
@@ -17,6 +18,7 @@ class Recommend:
     #    return cls._instance
     
     def __addNum(self,matching,rate,style,gender,tone,occasion):
+        
         styles = matching.style_code.split(',')
         for s in styles:
             if s in style.keys():
@@ -45,6 +47,14 @@ class Recommend:
 
     def get_recommend_list(self):
         #get matching features
+        try:
+            recommend_num = open('recommend_num.pkl','rb')
+            N = int(pickle.load(recommend_num))
+        except:
+            N = 10
+        finally:
+            N = 10
+            recommend_num.close()
         items_feature = {}
         matchings = EmallMatching.objects.all()       
         for matching in matchings:     
@@ -129,7 +139,9 @@ class Recommend:
                         sum += items_feature[itemKey][o]*occasion[o]
                 cus_rec_list.append((itemKey,sum))
             cus_rec_list.sort(key=lambda x:x[1], reverse=True)
-            cus_rec_list = cus_rec_list[0:10]
+            
+            cus_rec_list = cus_rec_list[0:N]
             cus_rec_list = [x[0] for x in cus_rec_list]
             self.recommend_dict[customer.id] = cus_rec_list
+        recommend = self.recommend_dict
 
