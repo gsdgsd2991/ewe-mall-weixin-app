@@ -5,10 +5,14 @@ class Recommend:
     '''
     get the recommend list
     '''
+    
     recommend = {}
-    def __init__(self,weight):
-        self.recommend_dict = {}
-        self.weight = weight
+    weight = [1, 1, 1]
+
+    def __init__(self):
+        pass 
+        #self.recommend_dict = {}
+        #self.weight = weight
         #set time to calculate the recommend list
 
     #def __new__(cls,*args,**kw):
@@ -16,8 +20,13 @@ class Recommend:
     #        orig = super(Recommend,cls)
     #        cls._instance = orig.__new__(cls,*args,**kw)
     #    return cls._instance
-    
-    def __addNum(self,matching,rate,style,gender,tone,occasion):
+
+    @classmethod
+    def set_weight(self,w):
+        Recommend.weight = w
+
+    @classmethod
+    def addNum(self,matching,rate,style,gender,tone,occasion):
         
         styles = matching.style_code.split(',')
         for s in styles:
@@ -44,7 +53,7 @@ class Recommend:
                 tone[t] += rate
             else:
                 tone[t] = rate
-
+    @classmethod
     def get_recommend_list(self):
         #get matching features
         try:
@@ -92,35 +101,35 @@ class Recommend:
             for order in orders:
                 matching = order.emallorderitem_set.all()[0]
                 matching = matching.match_id
-                self.__addNum(matching,self.weight[0],style,gender,tone,occasion)
+                self.addNum(matching, Recommend.weight[0], style, gender, tone, occasion)
             #the favorite items of customer
             favorites = customer.emallfavorite_set.all()
             for favorite in favorites:
                 matching = favorite.match_id
-                self.__addNum(matching,self.weight[1],style,gender,tone,occasion)
+                self.addNum(matching, Recommend.weight[1], style, gender, tone, occasion)
             #customer customized tags
             tags = customer.emallcustomertag_set.all()
             for tag in tags:
                 if tag.type_code.strip() == 'PRODUCT_GENDER':
                     if tag.code in gender.keys():
-                        gender[tag.code] += self.weight[2]
+                        gender[tag.code] += Recommend.weight[2]
                     else:
-                        gender[tag.code] = self.weight[2]
+                        gender[tag.code] = Recommend.weight[2]
                 if tag.type_code.strip() == 'PRODUCT_TONE':
                     if tag.code in tone.keys():
-                        tone[tag.code] += self.weight[2]
+                        tone[tag.code] += Recommend.weight[2]
                     else:
-                        tone[tag.code] = self.weight[2]
+                        tone[tag.code] = Recommend.weight[2]
                 if tag.type_code.strip() == 'PRODUCT_OCCASION':
                     if tag.code in occasion.keys():
-                        occasion[tag.code] += self.weight[2]
+                        occasion[tag.code] += Recommend.weight[2]
                     else:
-                        occasion[tag.code] = self.weight[2]
+                        occasion[tag.code] = Recommend.weight[2]
                 if tag.type_code.strip() == 'PRODUCT_STYLE':
                     if tag.code in style.keys():
-                        style[tag.code] += self.weight[2]
+                        style[tag.code] += Recommend.weight[2]
                     else:
-                        style[tag.code] = self.weight[2]
+                        style[tag.code] = Recommend.weight[2]
             #calculate recommender list
             cus_rec_list = []
             for itemKey in items_feature:
@@ -142,6 +151,6 @@ class Recommend:
             
             cus_rec_list = cus_rec_list[0:N]
             cus_rec_list = [x[0] for x in cus_rec_list]
-            self.recommend_dict[customer.id] = cus_rec_list
-        recommend = self.recommend_dict
+            Recommend.recommend[customer.id] = cus_rec_list
+         
 

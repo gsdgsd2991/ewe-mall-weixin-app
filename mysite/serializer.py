@@ -19,3 +19,7 @@ class HistorySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = TblCustomerMatchHistory
         fields=('customization_person_name','match_id','last_modified','deleted')
+
+#class RecommendListSerializer(serializers.HyperlinkedModelSerializer):
+#    class Meta:
+        

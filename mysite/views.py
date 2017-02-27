@@ -148,10 +148,10 @@ def get_recommend(request):
 @api_view(['GET'])
 def start_recommend(request):
     weight = open('recommend_weight.pkl','rb') 
-    rec = Recommend(weight=[int(w) for w in pickle.load(weight)])
-    weight.close() 
-    rec.get_recommend_list()
-    ans = rec.recommend_dict
+    Recommend.set_weight([int(w) for w in pickle.load(weight)])
+    weight.close()
+    Recommend.get_recommend_list()
+    #ans = rec.recommend_dict
     return Response(status = status.HTTP_200_OK)
 
 @api_view(['GET'])
@@ -170,5 +170,7 @@ def set_recommend_num(request):
 
 @api_view(['GET'])
 def get_recommend_list(request):
-    id = request.GET.get('customer_id')
-    return Response(serializers.ListSerializer(Recommend.recommend[id]).data)
+    id = int(request.GET.get('customer_id'))
+    #return Response(serializers.Serializer(len(Recommend.recommend)).data)
+    
+    return Response(json.dumps(Recommend.recommend[id]))

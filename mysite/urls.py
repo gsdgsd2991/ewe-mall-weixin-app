@@ -34,8 +34,21 @@ urlpatterns = [
    url(r'^api-auth/create_body/$', create_body),
    url(r'^api-auth/get_matches/$', get_matches),
    url(r'^api-auth/get_match/$', get_match),
+   #get the recommend items for a Customer
+   #parameter
+   #customer_id-integer
+   #return Value
+   #json list of the item ids
    url(r'^api-auth/get_recommend/$',get_recommend_list),
+   #calculate the recommend list of all customers and all items
+   #no parameter
    url(r'^api-auth/start_recommend/$',start_recommend),
+   #set the weight of the Recommend
+   #parameter
+   #orderWeight-integer
+   #favoriteWeight-integer
+   #genderWeight-integer
+   #num-integer-the number of recommender list
    url(r'^api-auth/set_recommend_num/$',set_recommend_num),
 ]
 urlpatterns = format_suffix_patterns(urlpatterns)
