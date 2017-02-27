@@ -55,15 +55,23 @@ class Recommend:
                 tone[t] = rate
     @classmethod
     def get_recommend_list(self):
-        #get matching features
+        #get weight    
+        w = []
+        code = TblImCodeType.objects.filter(code = 'orderWeight')
+        w.append(int(code[0].comment))
+        code = TblImCodeType.objects.filter(code = 'favoriteWeight')
+        w.append(int(code[0].comment))
+        code = TblImCodeType.objects.filter(code = 'tagWeight')
+        w.append(int(code[0].comment))
+        self.set_weight(w)
+        #get recommend num
         try:
-            recommend_num = open('recommend_num.pkl','rb')
-            N = int(pickle.load(recommend_num))
+           # recommend_num = open('recommend_num.pkl','rb')
+            N = int(TblImCodeType.objects.filter(code='recommend_num')[0].comment)
+            #N = int(pickle.load(recommend_num))
         except:
             N = 10
-        finally:
-            N = 10
-            recommend_num.close()
+           # recommend_num.close()
         items_feature = {}
         matchings = EmallMatching.objects.all()       
         for matching in matchings:     

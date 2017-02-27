@@ -49,6 +49,6 @@ urlpatterns = [
    #favoriteWeight-integer
    #genderWeight-integer
    #num-integer-the number of recommender list
-   url(r'^api-auth/set_recommend_num/$',set_recommend_num),
+  # url(r'^api-auth/set_recommend_num/$',set_recommend_num),
 ]
 urlpatterns = format_suffix_patterns(urlpatterns)

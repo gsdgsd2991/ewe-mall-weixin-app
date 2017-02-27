@@ -147,9 +147,9 @@ def get_recommend(request):
 
 @api_view(['GET'])
 def start_recommend(request):
-    weight = open('recommend_weight.pkl','rb') 
-    Recommend.set_weight([int(w) for w in pickle.load(weight)])
-    weight.close()
+    #weight = open('recommend_weight.pkl','rb') 
+    #Recommend.set_weight([int(w) for w in pickle.load(weight)])
+    #weight.close()
     Recommend.get_recommend_list()
     #ans = rec.recommend_dict
     return Response(status = status.HTTP_200_OK)
@@ -158,7 +158,7 @@ def start_recommend(request):
 def set_recommend_num(request):
     w1 = request.GET.get('orderWeight')
     w2 = request.GET.get('favoriteWeight')
-    w3 = request.GET.get('genderWeight')
+    w3 = request.GET.get('tagWeight')
     num = request.GET.get('num')
     recommend_num = open('recommend_num.pkl','wb')
     pickle.dump(num,recommend_num)
