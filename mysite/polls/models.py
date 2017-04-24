@@ -8,8 +8,49 @@
 from __future__ import unicode_literals
 
 from django.db import models
+'''
+class TblCustomerShape(models.Model):
+    id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
+    customer_id = models.IntegerField(db_column='CUSTOMER_ID', blank=True, null=True)  # Field name made lowercase.
+    customization_person_name = models.CharField(max_length=40, blank=True, null=True)
+    weixin_open_id = models.CharField(db_column='WEIXIN_OPEN_ID', max_length=200, blank=True, null=True)  # Field name made lowercase.
+    height = models.IntegerField(blank=True, null=True)
+    weight = models.IntegerField(blank=True, null=True)
+    body_shape = models.CharField(max_length=40, blank=True, null=True)
+    face_shape = models.CharField(max_length=40, blank=True, null=True)
+    face_color = models.CharField(max_length=40, blank=True, null=True)
+    image_url = models.CharField(max_length=255, blank=True, null=True)
+    isoneself = models.IntegerField(blank=True, null=True)
+    created_by = models.IntegerField(blank=True, null=True)
+    created_date = models.DateTimeField(blank=True, null=True)
+    last_modified_id = models.IntegerField(blank=True, null=True)
+    mark_for_delete = models.IntegerField(blank=True, null=True)
+    opt_counter = models.IntegerField(blank=True, null=True)
+    deleted_date = models.DateTimeField(blank=True, null=True)
+    last_modified = models.DateTimeField(blank=True, null=True)
+    deleted = models.IntegerField(blank=True, null=True)
+    sex=models.BooleanField(blank=True,default=False)
 
+    class Meta:
+        managed = True
+        db_table = 'tbl_customer_shape'
 
+class TblCustomerMatchHistory(models.Model):
+    id = models.AutoField(db_column='ID',primary_key=True)
+    customer_id = models.IntegerField(db_column='CUSTOMER_ID',blank=True,null=True)
+    customization_person_name = models.CharField(max_length=40,blank=True,null=True)
+    weixin_open_id = models.CharField( max_length=200, blank=True, null=True)  # Field name made lowercase.
+    match_id = models.IntegerField(blank=True,null=True)
+    deleted_date = models.DateTimeField(blank=True, null=True)
+    last_modified = models.DateTimeField(blank=True, null=True)
+    deleted = models.IntegerField(blank=True, null=True)
+    created_by = models.IntegerField(blank=True, null=True)
+    created_date = models.DateTimeField(blank=True, null=True)
+    last_modified_id = models.IntegerField(blank=True, null=True)
+    class Meta:
+        managed=True
+        db_table='tbl_customer_match_history'
+'''
 class BasMallPermission(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
     role_code = models.CharField(db_column='ROLE_CODE', max_length=50, blank=True, null=True)  # Field name made lowercase.
@@ -217,10 +258,44 @@ class EmallComment(models.Model):
         managed = False
         db_table = 'emall_comment'
 
+class TblCustomer(models.Model):
+    id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
+    customer_no = models.CharField(db_column='CUSTOMER_NO', max_length=40, blank=True, null=True)  # Field name made lowercase.
+    level = models.CharField(db_column='LEVEL', max_length=40, blank=True, null=True)  # Field name made lowercase.
+    name = models.TextField(db_column='NAME', blank=True, null=True)  # Field name made lowercase.
+    gender = models.CharField(db_column='GENDER', max_length=20, blank=True, null=True)  # Field name made lowercase.
+    age = models.IntegerField(db_column='AGE', blank=True, null=True)  # Field name made lowercase.
+    money = models.FloatField(db_column='MONEY', blank=True, null=True)  # Field name made lowercase.
+    bonus_point = models.IntegerField(db_column='BONUS_POINT', blank=True, null=True)  # Field name made lowercase.
+    image_url = models.CharField(db_column='IMAGE_URL', max_length=400, blank=True, null=True)  # Field name made lowercase.
+    channel_source = models.CharField(db_column='CHANNEL_SOURCE', max_length=40, blank=True, null=True)  # Field name made lowercase.
+    market_activity_source = models.CharField(db_column='MARKET_ACTIVITY_SOURCE', max_length=40, blank=True, null=True)  # Field name made lowercase.
+    weixin_open_id = models.CharField(db_column='WEIXIN_OPEN_ID', max_length=200, blank=True, null=True)  # Field name made lowercase.
+    subscribe = models.IntegerField(db_column='SUBSCRIBE', blank=True, null=True)  # Field name made lowercase.
+    subscribe_time = models.DateTimeField(db_column='SUBSCRIBE_TIME', blank=True, null=True)  # Field name made lowercase.
+    join_date = models.DateTimeField(db_column='JOIN_DATE', blank=True, null=True)  # Field name made lowercase.
+    birth_date = models.DateField(db_column='BIRTH_DATE', blank=True, null=True)  # Field name made lowercase.
+    comment = models.TextField(db_column='COMMENT', blank=True, null=True)  # Field name made lowercase.
+    mobile = models.CharField(db_column='MOBILE', max_length=40, blank=True, null=True)  # Field name made lowercase.
+    status = models.CharField(db_column='STATUS', max_length=40, blank=True, null=True)  # Field name made lowercase.
+    customer_type = models.CharField(db_column='CUSTOMER_TYPE', max_length=40, blank=True, null=True)  # Field name made lowercase.
+    created_by = models.IntegerField(db_column='CREATED_BY')  # Field name made lowercase.
+    created_date = models.DateTimeField(db_column='CREATED_DATE')  # Field name made lowercase.
+    last_modified_id = models.IntegerField(db_column='LAST_MODIFIED_ID')  # Field name made lowercase.
+    mark_for_delete = models.IntegerField(db_column='MARK_FOR_DELETE', blank=True, null=True)  # Field name made lowercase.
+    opt_counter = models.IntegerField(db_column='OPT_COUNTER', blank=True, null=True)  # Field name made lowercase.
+    deleted_date = models.DateTimeField(db_column='DELETED_DATE', blank=True, null=True)  # Field name made lowercase.
+    last_modified = models.DateTimeField(db_column='LAST_MODIFIED', blank=True, null=True)  # Field name made lowercase.
+    deleted = models.IntegerField(db_column='DELETED', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'tbl_customer'
+
 
 class EmallCustomerTag(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
-    customer_id = models.IntegerField(db_column='CUSTOMER_ID', blank=True, null=True)  # Field name made lowercase.
+    customer_id = models.ForeignKey(TblCustomer,db_column='CUSTOMER_ID', blank=True, null=True)  # Field name made lowercase.
     tag_group_id = models.IntegerField(db_column='TAG_GROUP_ID', blank=True, null=True)  # Field name made lowercase.
     type_code = models.CharField(db_column='TYPE_CODE', max_length=45, blank=True, null=True)  # Field name made lowercase.
     code = models.CharField(db_column='CODE', max_length=45, blank=True, null=True)  # Field name made lowercase.
@@ -325,13 +400,48 @@ class EmallExcelList(models.Model):
         managed = False
         db_table = 'emall_excel_list'
 
-
-class EmallFavorite(models.Model):
+class EmallMatching(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
     customer_id = models.IntegerField(db_column='CUSTOMER_ID', blank=True, null=True)  # Field name made lowercase.
     customer_name = models.CharField(db_column='CUSTOMER_NAME', max_length=45, blank=True, null=True)  # Field name made lowercase.
+    name = models.CharField(db_column='NAME', max_length=45, blank=True, null=True)  # Field name made lowercase.
+    total_amount = models.FloatField(db_column='TOTAL_AMOUNT', blank=True, null=True)  # Field name made lowercase.
+    actual_amount = models.FloatField(db_column='ACTUAL_AMOUNT', blank=True, null=True)  # Field name made lowercase.
+    image_url = models.CharField(db_column='IMAGE_URL', max_length=255, blank=True, null=True)  # Field name made lowercase.
+    preferences = models.CharField(db_column='PREFERENCES', max_length=2000, blank=True, null=True)  # Field name made lowercase.
+    praises = models.IntegerField(db_column='PRAISES', blank=True, null=True)  # Field name made lowercase.
+    steps = models.IntegerField(db_column='STEPS', blank=True, null=True)  # Field name made lowercase.
+    comments = models.IntegerField(db_column='COMMENTS', blank=True, null=True)  # Field name made lowercase.
+    favorites = models.IntegerField(db_column='FAVORITES', blank=True, null=True)  # Field name made lowercase.
+    likes = models.IntegerField(db_column='LIKES', blank=True, null=True)  # Field name made lowercase.
+    gender_code = models.CharField(db_column='GENDER_CODE', max_length=45, blank=True, null=True)  # Field name made lowercase.
+    tone_code = models.CharField(db_column='TONE_CODE', max_length=45, blank=True, null=True)  # Field name made lowercase.
+    occasion_code = models.CharField(db_column='OCCASION_CODE', max_length=255, blank=True, null=True)  # Field name made lowercase.
+    style_code = models.CharField(db_column='STYLE_CODE', max_length=255, blank=True, null=True)  # Field name made lowercase.
+    keywords = models.CharField(db_column='KEYWORDS', max_length=255, blank=True, null=True)  # Field name made lowercase.
+    content = models.CharField(db_column='CONTENT', max_length=2000, blank=True, null=True)  # Field name made lowercase.
     created_by = models.IntegerField(db_column='CREATED_BY')  # Field name made lowercase.
-    match_id = models.IntegerField(db_column='MATCH_ID', blank=True, null=True)  # Field name made lowercase.
+    created_date = models.DateTimeField(db_column='CREATED_DATE')  # Field name made lowercase.
+    last_modified_id = models.IntegerField(db_column='LAST_MODIFIED_ID')  # Field name made lowercase.
+    deleted_date = models.DateTimeField(db_column='DELETED_DATE', blank=True, null=True)  # Field name made lowercase.
+    mark_for_delete = models.IntegerField(db_column='MARK_FOR_DELETE', blank=True, null=True)  # Field name made lowercase.
+    opt_counter = models.IntegerField(db_column='OPT_COUNTER', blank=True, null=True)  # Field name made lowercase.
+    last_modified = models.DateTimeField(db_column='LAST_MODIFIED', blank=True, null=True)  # Field name made lowercase.
+    deleted = models.IntegerField(db_column='DELETED', blank=True, null=True)  # Field name made lowercase.
+    sys_random_praises_num = models.IntegerField(db_column='SYS_RANDOM_PRAISES_NUM', blank=True, null=True)  # Field name made lowercase.
+    sys_random_favorites_num = models.IntegerField(db_column='SYS_RANDOM_FAVORITES_NUM', blank=True, null=True)  # Field name made lowercase.
+    sys_random_comments_num = models.IntegerField(db_column='SYS_RANDOM_COMMENTS_NUM', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'emall_matching'
+
+class EmallFavorite(models.Model):
+    id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
+    customer_id = models.ForeignKey(TblCustomer,db_column='CUSTOMER_ID', blank=True, null=True)  # Field name made lowercase.
+    customer_name = models.CharField(db_column='CUSTOMER_NAME', max_length=45, blank=True, null=True)  # Field name made lowercase.
+    created_by = models.IntegerField(db_column='CREATED_BY')  # Field name made lowercase.
+    match_id = models.ForeignKey(EmallMatching,db_column='MATCH_ID', blank=True, null=True)  # Field name made lowercase.
     created_date = models.DateTimeField(db_column='CREATED_DATE')  # Field name made lowercase.
     deleted_date = models.DateTimeField(db_column='DELETED_DATE', blank=True, null=True)  # Field name made lowercase.
     last_modified_id = models.IntegerField(db_column='LAST_MODIFIED_ID')  # Field name made lowercase.
@@ -406,41 +516,7 @@ class EmallInvoice(models.Model):
         db_table = 'emall_invoice'
 
 
-class EmallMatching(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
-    customer_id = models.IntegerField(db_column='CUSTOMER_ID', blank=True, null=True)  # Field name made lowercase.
-    customer_name = models.CharField(db_column='CUSTOMER_NAME', max_length=45, blank=True, null=True)  # Field name made lowercase.
-    name = models.CharField(db_column='NAME', max_length=45, blank=True, null=True)  # Field name made lowercase.
-    total_amount = models.FloatField(db_column='TOTAL_AMOUNT', blank=True, null=True)  # Field name made lowercase.
-    actual_amount = models.FloatField(db_column='ACTUAL_AMOUNT', blank=True, null=True)  # Field name made lowercase.
-    image_url = models.CharField(db_column='IMAGE_URL', max_length=255, blank=True, null=True)  # Field name made lowercase.
-    preferences = models.CharField(db_column='PREFERENCES', max_length=2000, blank=True, null=True)  # Field name made lowercase.
-    praises = models.IntegerField(db_column='PRAISES', blank=True, null=True)  # Field name made lowercase.
-    steps = models.IntegerField(db_column='STEPS', blank=True, null=True)  # Field name made lowercase.
-    comments = models.IntegerField(db_column='COMMENTS', blank=True, null=True)  # Field name made lowercase.
-    favorites = models.IntegerField(db_column='FAVORITES', blank=True, null=True)  # Field name made lowercase.
-    likes = models.IntegerField(db_column='LIKES', blank=True, null=True)  # Field name made lowercase.
-    gender_code = models.CharField(db_column='GENDER_CODE', max_length=45, blank=True, null=True)  # Field name made lowercase.
-    tone_code = models.CharField(db_column='TONE_CODE', max_length=45, blank=True, null=True)  # Field name made lowercase.
-    occasion_code = models.CharField(db_column='OCCASION_CODE', max_length=255, blank=True, null=True)  # Field name made lowercase.
-    style_code = models.CharField(db_column='STYLE_CODE', max_length=255, blank=True, null=True)  # Field name made lowercase.
-    keywords = models.CharField(db_column='KEYWORDS', max_length=255, blank=True, null=True)  # Field name made lowercase.
-    content = models.CharField(db_column='CONTENT', max_length=2000, blank=True, null=True)  # Field name made lowercase.
-    created_by = models.IntegerField(db_column='CREATED_BY')  # Field name made lowercase.
-    created_date = models.DateTimeField(db_column='CREATED_DATE')  # Field name made lowercase.
-    last_modified_id = models.IntegerField(db_column='LAST_MODIFIED_ID')  # Field name made lowercase.
-    deleted_date = models.DateTimeField(db_column='DELETED_DATE', blank=True, null=True)  # Field name made lowercase.
-    mark_for_delete = models.IntegerField(db_column='MARK_FOR_DELETE', blank=True, null=True)  # Field name made lowercase.
-    opt_counter = models.IntegerField(db_column='OPT_COUNTER', blank=True, null=True)  # Field name made lowercase.
-    last_modified = models.DateTimeField(db_column='LAST_MODIFIED', blank=True, null=True)  # Field name made lowercase.
-    deleted = models.IntegerField(db_column='DELETED', blank=True, null=True)  # Field name made lowercase.
-    sys_random_praises_num = models.IntegerField(db_column='SYS_RANDOM_PRAISES_NUM', blank=True, null=True)  # Field name made lowercase.
-    sys_random_favorites_num = models.IntegerField(db_column='SYS_RANDOM_FAVORITES_NUM', blank=True, null=True)  # Field name made lowercase.
-    sys_random_comments_num = models.IntegerField(db_column='SYS_RANDOM_COMMENTS_NUM', blank=True, null=True)  # Field name made lowercase.
 
-    class Meta:
-        managed = False
-        db_table = 'emall_matching'
 
 
 class EmallMatchingItem(models.Model):
@@ -466,10 +542,12 @@ class EmallMatchingItem(models.Model):
         db_table = 'emall_matching_item'
 
 
+
+
 class EmallOrder(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
     order_no = models.CharField(db_column='ORDER_NO', max_length=45, blank=True, null=True)  # Field name made lowercase.
-    customer_id = models.IntegerField(db_column='CUSTOMER_ID', blank=True, null=True)  # Field name made lowercase.
+    customer_id = models.ForeignKey(TblCustomer,db_column='CUSTOMER_ID', blank=True, null=True)  # Field name made lowercase.
     customer_name = models.CharField(db_column='CUSTOMER_NAME', max_length=45, blank=True, null=True)  # Field name made lowercase.
     customer_account = models.CharField(db_column='CUSTOMER_ACCOUNT', max_length=45, blank=True, null=True)  # Field name made lowercase.
     address_id = models.IntegerField(db_column='ADDRESS_ID', blank=True, null=True)  # Field name made lowercase.
@@ -543,13 +621,13 @@ class EmallOrderDeliver(models.Model):
 
 class EmallOrderItem(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
-    order_id = models.IntegerField(db_column='ORDER_ID')  # Field name made lowercase.
+    order_id = models.ForeignKey(EmallOrder,db_column='ORDER_ID')  # Field name made lowercase.
     order_no = models.CharField(db_column='ORDER_NO', max_length=45, blank=True, null=True)  # Field name made lowercase.
     product_no = models.CharField(db_column='PRODUCT_NO', max_length=100, blank=True, null=True)  # Field name made lowercase.
     product_id = models.IntegerField(db_column='PRODUCT_ID', blank=True, null=True)  # Field name made lowercase.
     product_name = models.CharField(db_column='PRODUCT_NAME', max_length=255, blank=True, null=True)  # Field name made lowercase.
     product_sku_id = models.CharField(db_column='PRODUCT_SKU_ID', max_length=45, blank=True, null=True)  # Field name made lowercase.
-    match_id = models.IntegerField(db_column='MATCH_ID', blank=True, null=True)  # Field name made lowercase.
+    match_id = models.ForeignKey(EmallMatching,db_column='MATCH_ID', blank=True, null=True)  # Field name made lowercase.
     size_code = models.CharField(db_column='SIZE_CODE', max_length=45, blank=True, null=True)  # Field name made lowercase.
     color_code = models.CharField(db_column='COLOR_CODE', max_length=45, blank=True, null=True)  # Field name made lowercase.
     count = models.CharField(db_column='COUNT', max_length=45, blank=True, null=True)  # Field name made lowercase.
@@ -1647,41 +1725,6 @@ class TblCouponTemplate(models.Model):
         db_table = 'tbl_coupon_template'
 
 
-class TblCustomer(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
-    customer_no = models.CharField(db_column='CUSTOMER_NO', max_length=40, blank=True, null=True)  # Field name made lowercase.
-    level = models.CharField(db_column='LEVEL', max_length=40, blank=True, null=True)  # Field name made lowercase.
-    name = models.TextField(db_column='NAME', blank=True, null=True)  # Field name made lowercase.
-    gender = models.CharField(db_column='GENDER', max_length=20, blank=True, null=True)  # Field name made lowercase.
-    age = models.IntegerField(db_column='AGE', blank=True, null=True)  # Field name made lowercase.
-    money = models.FloatField(db_column='MONEY', blank=True, null=True)  # Field name made lowercase.
-    bonus_point = models.IntegerField(db_column='BONUS_POINT', blank=True, null=True)  # Field name made lowercase.
-    image_url = models.CharField(db_column='IMAGE_URL', max_length=400, blank=True, null=True)  # Field name made lowercase.
-    channel_source = models.CharField(db_column='CHANNEL_SOURCE', max_length=40, blank=True, null=True)  # Field name made lowercase.
-    market_activity_source = models.CharField(db_column='MARKET_ACTIVITY_SOURCE', max_length=40, blank=True, null=True)  # Field name made lowercase.
-    weixin_open_id = models.CharField(db_column='WEIXIN_OPEN_ID', max_length=200, blank=True, null=True)  # Field name made lowercase.
-    subscribe = models.IntegerField(db_column='SUBSCRIBE', blank=True, null=True)  # Field name made lowercase.
-    subscribe_time = models.DateTimeField(db_column='SUBSCRIBE_TIME', blank=True, null=True)  # Field name made lowercase.
-    join_date = models.DateTimeField(db_column='JOIN_DATE', blank=True, null=True)  # Field name made lowercase.
-    birth_date = models.DateField(db_column='BIRTH_DATE', blank=True, null=True)  # Field name made lowercase.
-    comment = models.TextField(db_column='COMMENT', blank=True, null=True)  # Field name made lowercase.
-    mobile = models.CharField(db_column='MOBILE', max_length=40, blank=True, null=True)  # Field name made lowercase.
-    status = models.CharField(db_column='STATUS', max_length=40, blank=True, null=True)  # Field name made lowercase.
-    customer_type = models.CharField(db_column='CUSTOMER_TYPE', max_length=40, blank=True, null=True)  # Field name made lowercase.
-    created_by = models.IntegerField(db_column='CREATED_BY')  # Field name made lowercase.
-    created_date = models.DateTimeField(db_column='CREATED_DATE')  # Field name made lowercase.
-    last_modified_id = models.IntegerField(db_column='LAST_MODIFIED_ID')  # Field name made lowercase.
-    mark_for_delete = models.IntegerField(db_column='MARK_FOR_DELETE', blank=True, null=True)  # Field name made lowercase.
-    opt_counter = models.IntegerField(db_column='OPT_COUNTER', blank=True, null=True)  # Field name made lowercase.
-    deleted_date = models.DateTimeField(db_column='DELETED_DATE', blank=True, null=True)  # Field name made lowercase.
-    last_modified = models.DateTimeField(db_column='LAST_MODIFIED', blank=True, null=True)  # Field name made lowercase.
-    deleted = models.IntegerField(db_column='DELETED', blank=True, null=True)  # Field name made lowercase.
-
-    class Meta:
-        managed = False
-        db_table = 'tbl_customer'
-
-
 class TblCustomerContactPointStatistics(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
     customer_id = models.IntegerField(db_column='CUSTOMER_ID', blank=True, null=True)  # Field name made lowercase.
@@ -1700,7 +1743,7 @@ class TblCustomerContactPointStatistics(models.Model):
         managed = False
         db_table = 'tbl_customer_contact_point_statistics'
 
-
+'''
 class TblCustomerShape(models.Model):
     id = models.IntegerField(db_column='ID', primary_key=True)  # Field name made lowercase.
     customer_id = models.IntegerField(db_column='CUSTOMER_ID', blank=True, null=True)  # Field name made lowercase.
@@ -1724,7 +1767,7 @@ class TblCustomerShape(models.Model):
     class Meta:
         managed = False
         db_table = 'tbl_customer_shape'
-
+'''
 
 class TblCustomerStatistics(models.Model):
     id = models.IntegerField(db_column='ID', primary_key=True)  # Field name made lowercase.
