@@ -6,6 +6,7 @@ import json
 import os
 import os.path
 import mysite.log_file_rec as log_file_rec
+from datetime import *
 
 class Recommend:
     '''
@@ -142,6 +143,10 @@ class Recommend:
                 N = int(TblImCodeType.objects.filter(code='recommend_num')[0].comment)
             except:
                 N = 10
+            #最近的搭配编号
+            recentDays = int(TblImCodeType.objects.get(code='recentDays').comment)
+            recent_matchings = EmallMatching.objects.filter(created_date__gte=date.today()-timedelta(days=recentDays))
+            recent_matchings = [i.id for i in recent_matchings]
             # recommend_num.close()
             items_feature = {}
             matchings = EmallMatching.objects.all()       
@@ -227,7 +232,13 @@ class Recommend:
                             sum += items_feature[itemKey][o]*occasion[o]
                     cus_rec_list[customer.id].append((itemKey,sum))
                 cus_rec_list[customer.id].sort(key=lambda x:x[1],reverse=True)
-                cus_rec_list[customer.id] = cus_rec_list[customer.id][:2*N]
+                recentDays_recommend_ratio = TblImCodeType.objects.get(code='recentDays_recommend_ratio').comment
+                #新上matching和老matching混合
+                num_new = int(2*N*recentDays_recommend_ratio)
+                num_old = int(2*N*(1-recentDays_recommend_ratio))
+                rec_list_new = [i for i in cus_rec_list[customer.id] if i[0] in recent_matchings][:num_new]
+                rec_list_old = [i for i in cus_rec_list[customer.id] if i[0] not in recent_matchings][:num_old]
+                cus_rec_list[customer.id] = rec_list_new+rec_list_old#cus_rec_list[customer.id][:2*N]
                 tempDict = {}
                 for k,v in cus_rec_list[customer.id]:
                     tempDict[k] = v
