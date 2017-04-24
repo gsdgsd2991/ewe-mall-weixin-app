@@ -85,10 +85,18 @@
             "request": "launch",
             "stopOnEntry": true,
             "pythonPath": "${config.python.pythonPath}",
+<<<<<<< HEAD
             "program": "${workspaceRoot}/mysite/manage.py",
             "cwd": "${workspaceRoot}",
             "args": [
                 "runserver",
+=======
+            "program": "${workspaceRoot}/manage.py",
+            "cwd": "${workspaceRoot}",
+            "args": [
+                "runserver",
+                "192.168.247.130:8000",
+>>>>>>> 51ffb686cce6e1ee3a26a1bb0634f64fcec9612c
                 "--noreload"
             ],
             "debugOptions": [
